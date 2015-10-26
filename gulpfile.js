@@ -61,6 +61,16 @@ gulp.task('browserify', function() {
     .pipe(gulp.dest('./app/js'));
 });
 
+gulp.task('browserifyDist', function() {
+    gulp.src(['app/js/main.js'])
+    .pipe(browserify({
+        insertGlobals: true,
+        debug: true
+    }))
+    .pipe(concat('bundled.js'))
+    .pipe(gulp.dest('./dist/js'));
+});
+
 gulp.task('connect', function () {
   connect.server({
     root: 'app/',
@@ -82,5 +92,5 @@ gulp.task('default',
 );
 // build task
 gulp.task('build',
-  ['lint', 'minify-css', 'minify-js', 'copy-html-files', 'copy-bower-components', 'connectDist']
+  ['lint', 'minify-css', 'browserifyDist','minify-js', 'copy-html-files', 'copy-bower-components', 'connectDist']
 );
