@@ -1,6 +1,11 @@
 (function () {
     'use strict';
 
+    require('angular');
+    require('angular-route');
+    require('angular-animate');
+    var mainCtrl = require('../controllers/mainCtrl.js');
+
     angular.module('SampleApp', ['ngRoute', 'ngAnimate'])
 
     .config([
@@ -19,15 +24,8 @@
                 redirectTo: '/'
             });
         }
-    ]);
+    ])
 
-    angular.module('SampleApp')
-
-    .controller('MainController', [
-        '$scope',
-        function($scope){
-            $scope.test = 'Testing...';
-        }
-    ]);
+    .controller('MainController', ['$scope', mainCtrl]);
 
 })();
